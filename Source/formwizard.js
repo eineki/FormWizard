@@ -12,6 +12,7 @@ requires:
 
 provides: [FormWizard]
 
+DEMO: http://www.liberosoftware.net/FormWizard/demo
 */
 
 function WizardException(message){
