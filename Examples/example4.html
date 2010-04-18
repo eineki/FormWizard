@@ -16,36 +16,52 @@
 </head>
 <body>
 <form id="contactForm" action="#">
-<fieldset class="wizard-page">
+<fieldset class="wizard-page" id="contactData">
+<legend><span>Contact Data</span></legend>
 <p>Insert your email and let me send you a ton of spam. You can 
 change idea later in the submission process. Sure, I swear.</p>
 <input type="text" name="email"i id="email"/>
 </fieldset>
-<fieldset class="wizard-page">
+<fieldset class="wizard-page" id="messagePage">
+<legend><span>Time to input a complicate message</span></legend>
 <p>Insert your message below</p>
-<textarea id="areamsg" name="message" cols="50" rows="7">Messaggio</textarea>
+<textarea id="areamsg" name="message" cols="50" rows="7">Leave your message here...</textarea>
 </fieldset>
 <fieldset class="wizard-page" id="summaryPage">
-<h2>Summary</h2>
+<legend><span>Summary</span></legend>
 <p>Your mail is <span id="confirmEmail"></span> and the message you filed is
 <blockquote id="confirmMsg"></blockquote> </p>
 <p>You can go back and change the previously 
 inputed datas or press the submit button to send your data to the nearest
 black hole.</p>
-<p class="note">You have noted that the user can proceed in the wizard without filling any field.
-In the third example we can put a stop to this unethical behaviour!</p>
  <input type="submit"/>
 </fieldset>
 </form>
 </body>
 <script type="text/javascript">
 new FormWizard('contactForm', {createControlArea: true}, 
-{ "summaryPage": {
+{
+  "summaryPage": {
     "onEnter": function(){$('confirmEmail').innerHTML = $('email').value;
                           $('confirmMsg').innerHTML = $('areamsg').value;
                           return true; }
+  },
+  "contactData": {
+    "onExit": function(){if ($('email').value) return true;
+      alert("The email field is mandatory! Fill it to proceed");
+      return false;
+     }
+  },
+  "messagePage": {
+    "onExit":  function(){ var test = $('areamsg').value;
+if (test && test != "Leave your message here...") return true;
+      alert("Please, leave a message before you leave this page.");
+      return false;
+     }
   }
 }
 );
+
+$('areamsg').addEvent('focus',function(){this.value="";});
 </script>
 </html>
