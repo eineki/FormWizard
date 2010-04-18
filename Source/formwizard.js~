@@ -1,3 +1,20 @@
+/*
+---
+description: FormWizard Class, WizardException.
+
+license: MIT-style
+
+authors:
+- Eineki
+
+requires:
+- more/1.2.4: Lang
+- core/1.2.4: '*'
+
+provides: [FormWizard]
+
+*/
+
 function WizardException(message){
 	this.name='WizardException';
 	this.message= message;

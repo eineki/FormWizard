@@ -11,8 +11,6 @@ In order to let the developer integrate the wizard into the look and feel of a s
 the css classes used by the wizard are totally customizable and the burden of css
 styling is totally on the developer shoulders :)
 
-Nonetheless there is a css stylesheet with a example of styling.
-
 How to use
 ----------
 
@@ -72,16 +70,6 @@ page and before entering the new one. You can do everything you want until you r
 to block the page flip. Error communication to the user are on you, the wizard limit itself to block the page change.
 
 Note: if the exitPage function return false, the page change is aborted, the enterPage function is not called.
-
-Screenshots
------------
-
-This section is optional, but encouraged if the plugin affords it. Just a list of images, one per line. We do the resizing, so use actual size screenshots.
-
-![Screenshot 1](http://url_to_project_screenshot)
-![Screenshot 2](http://url_to_project_screenshot)
-![Screenshot 3](http://url_to_project_screenshot)
-![Screenshot 4](http://url_to_project_screenshot)
 
 RELEASE NOTE
 ------------

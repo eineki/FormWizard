@@ -1,15 +1,14 @@
 /*
 ---
-description: Element class, Elements class, and basic dom methods.
+description: FormWizard Class, WizardException.
 
 license: MIT-style
 
-authors:
-- Giacomo "Eineki" Magisano
+authors: [Eineki]
 
 requires:
-- more/Lang
-- core/1.2.1: '*'
+- more/1.2.4: [Lang]
+- core/1.2.4: '*'
 
 provides: [FormWizard]
 

@@ -78,9 +78,6 @@ RELEASE NOTE
 
 	 This is the first release, I feel the pageFlow section needs to be reworked eavily.
 
-
-The name is up to you, but remember to keep it meaningful and simple. Arbitrary sections are always optional.
-
 Contribution
 ------------
 
