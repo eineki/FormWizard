@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Form Wizard (Mootools plugin) example</title>
+<script type="text/javascript" src="mootools-1.2.4-core-nc.js"></script>
+<script type="text/javascript" src="mootools-1.2.4.2-more.js"></script>
+<script type="text/javascript" src="../formwizard.js"></script>
+</head>
+<body>
+<form id="contactForm" action="#">
+<fieldset class="wizard-page">
+<p>Insert your email and let me send you a ton of spam. You can 
+change idea later in the submission process. Sure, I swear.</p>
+<input type="text" name="email"/>
+</fieldset>
+<fieldset class="wizard-page">
+<p>Insert your message below</p>
+<textarea id="areamsg" name="message" cols="50" rows="7">Messaggio</textarea>
+</fieldset>
+<fieldset class="wizard-page">
+<h2>Summary</h2>
+<p>If we had used the pageFlow control we could have a summary of the data we get.</p>
+<p>Let me show you <a href="example2.html">another example</a> adding 
+a script to fill this page with the data from the previous ones.</p>
+<p>Oh, You won't push the submit button below, it send all your data 
+to nowere, as far as I know.</p>
+ <input type="submit"/>
+</fieldset>
+</form>
+</body>
+<script type="text/javascript">
+new FormWizard('contactForm', {createControlArea: true});
+</script>
+</html>
