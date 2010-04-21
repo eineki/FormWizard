@@ -1,4 +1,3 @@
-
 /*
 ---
 description: FormWizard Class, WizardException.
@@ -8,7 +7,7 @@ license: MIT-style
 authors: [Eineki]
 
 requires:
-- more/1.2.4: [Lang]
+- more/1.2.4: Lang
 - core/1.2.4: '*'
 
 provides: [FormWizard]
@@ -49,6 +48,7 @@ var FormWizard = new Class({
 		firstPage: 1,
 		createControlArea: false, // true if you need to add a bottom bar with controls
 		wizardControls: ["reset", "backward", "forward"],
+		showControlCaptions: true,
 		controls: {
 			submit: {hook: 'wizard-control-submit',
 				     title: MooTools.lang.get('Wizard', "submitButtonTitle")},
@@ -67,7 +67,7 @@ var FormWizard = new Class({
 		submit:  {action: $empty },
 		forward: {action: function(){ return this.changePage(this.currentPageIndex+1);}},
 		backward:{action: function(){return this.changePage(this.currentPageIndex-1);}},
-		reset:   {action: function() { this.domElement.reset(); return this.changePage(0);}}
+		reset:   {action: function() { return this.resetForm();}}
 	},
 
 	initialize: function (form, options, pageFlow){
@@ -79,8 +79,8 @@ var FormWizard = new Class({
 		this.domElement = form;
 
 		this.setOptions(options);
-	
-		this.currentPageIndex =  Math.max(this.options.firstPage-1,0) ;
+		this.options.firstPage = Math.max(this.options.firstPage-1,0) ; 	
+		this.currentPageIndex = this.options.firstPage; 
 	
 		form.addClass(this.options.formClass);
 		form.getChildren("." + this.options.pageClass).each(
@@ -99,7 +99,7 @@ var FormWizard = new Class({
 			var controlArea = new Element('div',{"class":this.options.controlAreaClass});
 			for (i=0, limit=this.options.wizardControls.length; i< limit; i++) {
 				button = this.options.controls[this.options.wizardControls[i]];
-				(new Element('button',{"html": button.title,
+				(new Element('button',{"html": this.options.showControlCaptions?button.title:'',
 					                   "class":[button.hook,$pick(button.buttonClass, this.options.defaultButtonClass)].join(' '),
 									   "events": {"click": this.controls[this.options.wizardControls[i]].action.bind(this)}
 									  }
@@ -109,9 +109,10 @@ var FormWizard = new Class({
 		} else {
 			for (i=0, limit=this.options.wizardControls.length; i< limit; i++) {
 				button = this.options.controls[this.options.wizardControls[i]];
-				buttonElement = form.getElement("."+button.hook);  // there should be just one
-				if (buttonElement) {
-					buttonElement.addEvent('click', this.controls[this.options.wizardControls[i]].action.bind(this));
+				buttonElements = form.getElements("."+button.hook); 
+        /* there should be at least one */
+				if (buttonElements.length) {
+					buttonElements.addEvent('click', this.controls[this.options.wizardControls[i]].action.bind(this));
 				} else {
 					throw(new WizardException("Button not found: " + button.hook));
 				}
@@ -129,5 +130,13 @@ var FormWizard = new Class({
 			}
 		}
 		return false; // stop the event propagation
+	},
+	resetForm: function () {
+		this.domElement.reset();
+		this.pages[this.currentPageIndex].domElement.setStyle("display","none");
+		this.currentPageIndex = this.options.firstPage;
+		this.pages[this.currentPageIndex].domElement.setStyle("display","");
+		return false; // stop the event propagation
 	}
+
 }); // eowizard

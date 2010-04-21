@@ -5,27 +5,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>Form Wizard (Mootools plugin) example with pageFlow</title>
-<script type="text/javascript" src="mootools-1.2.4-core-nc.js"></script>
-<script type="text/javascript" src="mootools-1.2.4.2-more.js"></script>
+<script type="text/javascript" src="lib/mootools-1.2.4-core-nc.js"></script>
+<script type="text/javascript" src="lib/mootools-1.2.4.2-more.js"></script>
 <script type="text/javascript" src="../Source/FormWizard.js"></script>
-<style type="text/css">
-#confirmEmail {
-  font-weight: bolder;
-}
-</style>
+
+<link rel="stylesheet" type="text/css" href="assets/reset.css"/>
+<link rel="stylesheet" type="text/css" href="assets/example1.css"/>
 </head>
 <body>
+<div id="wrapper">
 <form id="contactForm" action="#">
 <fieldset class="wizard-page" id="contactData">
 <legend><span>Contact Data</span></legend>
 <p>Insert your email and let me send you a ton of spam. You can 
 change idea later in the submission process. Sure, I swear.</p>
-<input type="text" name="email"i id="email"/>
+<p class="centered-container"><input type="text" name="email"i id="email"/></p>
 </fieldset>
 <fieldset class="wizard-page">
 <legend><span>Time to input a complicate message</span></legend>
 <p>Insert your message below</p>
-<textarea id="areamsg" name="message" cols="50" rows="7">Messaggio</textarea>
+<p class="centered-container">
+  <textarea id="areamsg" name="message" cols="50" rows="7">Messaggio</textarea>
+</p>
 </fieldset>
 <fieldset class="wizard-page" id="summaryPage">
 <legend><span>Summary</span></legend>
@@ -36,9 +37,10 @@ inputed datas or press the submit button to send your data to the nearest
 black hole.</p>
 <p>Obviously, the widget contained in the several pages of the wizard
 can be scripted as usual as you will see to the <a href="example4.html">forth example</a></p>
- <input type="submit"/>
+<p class="centered-container"><input type="submit"/> </p>
 </fieldset>
 </form>
+</div>
 </body>
 <script type="text/javascript">
 new FormWizard('contactForm', {createControlArea: true}, 

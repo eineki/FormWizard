@@ -11,6 +11,8 @@ In order to let the developer integrate the wizard into the look and feel of a s
 the css classes used by the wizard are totally customizable and the burden of css
 styling is totally on the developer shoulders :)
 
+![Screenshot](http://github.com/eineki/FormWizard/raw/master/thumb.png)
+
 How to use
 ----------
 
@@ -35,6 +37,7 @@ The various available options are:
  - *controlAreaClass* (default "wizard-control-area") is the class appended to the area containing the wizard buttons
  - *firstPage* (default 1) is the first page to show to the user,
  - *createControlArea* (default: false) if true create a div with the needed control buttons and inject it at the form bottom
+ - *showControlCaptions* (default: true) if false omits (even if specified) the captioni (*title*) of the control buttons.
  - *wizardControls* (default ["reset", "backward", "forward"]) is an array listing the desired buttons (to be created or already in place), 
    the order matters if createControlArea is *true*. Recognized buttons are reset, backward, forward and submit, use should be clear
  - *controls* is an object containing configuration directives. It is aimed to configure the aspect of the various wizard buttons. It has 
@@ -74,9 +77,13 @@ Note: if the exitPage function return false, the page change is aborted, the ent
 RELEASE NOTE
 ------------
 
- + 2010-04-16 Formwizard 0.1 
-
-	 This is the first release, I feel the pageFlow section needs to be reworked eavily.
+ + 2010-04-16 FormWizard 0.1 
+    - This is the first release, I feel the pageFlow section needs to be reworked eavily.
+ + 2010-04-20 FormWizard 0.2
+    - Expanded the examples.
+    - Now we can have multiple control buttons of the same type.
+    - Added the option to hide the control button caption.
+    - Squashed a bug with the reset button callback that prevent the wizard to return to the first page in some cases.
 
 Contribution
 ------------
