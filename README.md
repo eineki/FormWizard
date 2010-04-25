@@ -36,6 +36,8 @@ The various available options are:
  - *defaultButtonClass* (default "wizard-button") is the class appended to the buttons used to change wizard pages (useful for styling)
  - *controlAreaClass* (default "wizard-control-area") is the class appended to the area containing the wizard buttons
  - *firstPage* (default 1) is the first page to show to the user,
+ - *enterLastPage* (default null) is the function called from the wizard before entering the last page, useful to quickly personalize the
+   wizard behaviour without resorting to the FlowControl options. It overwrite the corresponding FlowControl behaviour if both are present.
  - *createControlArea* (default: false) if true create a div with the needed control buttons and inject it at the form bottom
  - *showControlCaptions* (default: true) if false omits (even if specified) the captioni (*title*) of the control buttons.
  - *wizardControls* (default ["reset", "backward", "forward"]) is an array listing the desired buttons (to be created or already in place), 

@@ -58,7 +58,8 @@ var FormWizard = new Class({
 					  title: MooTools.lang.get('Wizard', "backwardButtonTitle")},
 			reset:{hook:'wizard-control-reset',
 				   title: MooTools.lang.get('Wizard',"resetButtonTitle")}
-		}
+		},
+		enterLastPage: null
 	},
 	domElement: null,
 	pages: [],
@@ -86,13 +87,17 @@ var FormWizard = new Class({
 		form.getChildren("." + this.options.pageClass).each(
 		function(item) {
 			var page = {domElement: item};
-			page.onEnterPage = pageFlow[item.id]?$pick(pageFlow[item.id].onEnter,$lambda(true)):$lambda(true);
-			page.onExitPage =  pageFlow[item.id]?$pick(pageFlow[item.id].onExit,$lambda(true)):$lambda(true);
+			page.onEnterPage = pageFlow[item.id]?$pick(pageFlow[item.id].onEnter, $lambda(true)):$lambda(true);
+			page.onExitPage =  pageFlow[item.id]?$pick(pageFlow[item.id].onExit, $lambda(true)): $lambda(true);
 			this.pages.push(page);
 		},this);
 
 		for (var i=1, limit=this.pages.length;i<limit;i++) {
 			this.pages[i].domElement.setStyle('display','none');
+		}
+		
+		if (this.options.enterLastPage !== null) {
+			this.pages[this.pages.length-1]['onEnterPage'] = this.options.enterLastPage;
 		}
 
 		if (this.options.createControlArea) {
@@ -138,5 +143,4 @@ var FormWizard = new Class({
 		this.pages[this.currentPageIndex].domElement.setStyle("display","");
 		return false; // stop the event propagation
 	}
-
 }); // eowizard
