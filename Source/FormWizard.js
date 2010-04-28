@@ -84,7 +84,7 @@ var FormWizard = new Class({
 		this.currentPageIndex = this.options.firstPage; 
 	
 		form.addClass(this.options.formClass);
-		form.getChildren("." + this.options.pageClass).each(
+		form.getElements("." + this.options.pageClass).each(
 		function(item) {
 			var page = {domElement: item};
 			page.onEnterPage = pageFlow[item.id]?$pick(pageFlow[item.id].onEnter, $lambda(true)):$lambda(true);
