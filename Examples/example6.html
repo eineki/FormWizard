@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Form Wizard (Mootools plugin) example with pageFlow</title>
+<script type="text/javascript" src="lib/mootools-1.2.4-core-nc.js"></script>
+<script type="text/javascript" src="lib/mootools-1.2.4.2-more.js"></script>
+<script type="text/javascript" src="../Source/FormWizard.js"></script>
+
+<link rel="stylesheet" type="text/css" href="assets/reset.css"/>
+<link rel="stylesheet" type="text/css" href="assets/example6.css"/>
+</head>
+<body>
+<div id="wrapper">
+<form id="contactForm" action="#">
+<fieldset class="wizard-page" id="contactData">
+<legend><span>Contact Data</span></legend>
+<p>Insert your email and let me send you a ton of spam. You can 
+change idea later in the submission process. Sure, I swear.</p>
+<p class="centered-container">
+  <input type="text" name="email"i id="email"/>
+</p>
+</fieldset>
+<fieldset class="wizard-page" id="messagePage">
+<legend><span>Time to input a complicate message</span></legend>
+<p>Insert your message below</p>
+<p class="centered-container">
+  <textarea id="areamsg" name="message" cols="50" rows="7">Leave your message here...</textarea>
+</p>
+</fieldset>
+<fieldset class="wizard-page" id="summaryPage">
+<legend><span>The End</span></legend>
+<p>Your mail is <span id="confirmEmail"></span> and the message you filed is
+<blockquote id="confirmMsg"></blockquote> </p>
+<p>You can go back and change the previously 
+inputed datas or press the submit button below to send your data to the nearest
+black hole.<br/>
+As usual, the submit button does not work (although it is in the control area now).</p>
+<p class="centered-container">The examples stops here. Stay tuned for more in
+the upcoming plugin updates.</p>
+</fieldset>
+</form>
+</div>
+</body>
+<script type="text/javascript">
+new FormWizard('contactForm', {createControlArea: true, wizardControls:["reset", "backward", "forward","submit"]}, 
+{
+  "summaryPage": {
+    "onEnter": function(){$('confirmEmail').innerHTML = $('email').value;
+                          $('confirmMsg').innerHTML = $('areamsg').value;
+                          return true; }
+  },
+  "contactData": {
+    "onExit": function(){if ($('email').value) return true;
+      alert("The email field is mandatory! Fill it to proceed");
+      return false;
+     }   
+  },
+  "messagePage": {
+    "onExit":  function(){ var test = $('areamsg').value;
+if (test && test != "Leave your message here...") return true;
+      alert("Please, leave a message before you leave this page.");
+      return false;
+     }
+  }
+}
+);
+
+$('areamsg').addEvent('focus',function(){this.value="";});
+</script>
+</html>
