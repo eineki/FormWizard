@@ -44,6 +44,9 @@ The various available options are:
    the order matters if createControlArea is *true*. Recognized buttons are reset, backward, forward and submit, use should be clear
  - *controls* is an object containing configuration directives. It is aimed to configure the aspect of the various wizard buttons. It has 
    four properties: submit, forward, backward and reset. 
+ - *currentPageClassPrefix* is the prefix to be used for marking the wizard container with a class describing the page displayed in order 
+   to give a css hook to fulfill dedicated (presentation?) tasks when the wizard flow reach specific pages. An example can be hide and
+   display the control buttons with css rules.
 
 	The properties share a common structure: it comprehends a *title* (used if the plugin have to create the button) and *hook* a class
 	used by the plugin to find the different buttons and attach to them the correct behaviour. Defaults are listed in the code below:
@@ -74,6 +77,9 @@ The object should contains an onEnter function and an onExit one. They are apply
 page and before entering the new one. You can do everything you want until you return a true value to grant the page change or a falsy one
 to block the page flip. Error communication to the user are on you, the wizard limit itself to block the page change.
 
+The functions get two parameters: the first is the index of the pages that has to be accessed, the latter is the index of the current page.
+Obviously in javascript it is possible to disregard the passed parameters and declare a function with zero or just a siglel parameter instead
+of the "canonical two"
 Note: if the exitPage function return false, the page change is aborted, the enterPage function is not called.
 
 RELEASE NOTE
@@ -86,7 +92,14 @@ RELEASE NOTE
     - Now we can have multiple control buttons of the same type.
     - Added the option to hide the control button caption.
     - Squashed a bug with the reset button callback that prevent the wizard to return to the first page in some cases.
-
+ + 2010-09-11 Formwizard 0.2.1
+    - Every time a page is flipped the container gain a css class describing the current page index (starting from 0)
+      There are also two special class, wizard-current-first and wizard-current-last, in addition to the "indexed version"
+      added to the container when the first and last pages are displayed respectively. The class prefix is obiously fully 
+      configurable.
+    - added a new example.
+    - The onEnterPage and onExitPage now can have two parameters, the page to show and the page actually displayed.
+      
 Contribution
 ------------
 

@@ -17,6 +17,8 @@ DEMO: http://www.liberosoftware.net/FormWizard/demo
 ...
 */
 
+/* Version: 0.2.1 2010-09-11 */
+
 function WizardException(message){
 	this.name='WizardException';
 	this.message= message;
@@ -45,6 +47,7 @@ var FormWizard = new Class({
 		pageClass: "wizard-page",
 		defaultButtonClass: "wizard-button",
 		controlAreaClass: "wizard-control-area",
+		currentPageClassPrefix: "wizard-current",
 		firstPage: 1,
 		createControlArea: false, // true if you need to add a bottom bar with controls
 		wizardControls: ["reset", "backward", "forward"],
@@ -59,11 +62,13 @@ var FormWizard = new Class({
 			reset:{hook:'wizard-control-reset',
 				   title: MooTools.lang.get('Wizard',"resetButtonTitle")}
 		},
-		enterLastPage: null
+		enterLastPage: null,
+		pageFlip: null
 	},
 	domElement: null,
 	pages: [],
 	currentPageIndex: 0, // The page being show
+	lastPageIndex: 0,
 	controls: {
 		submit:  {action: $empty },
 		forward: {action: function(){ return this.changePage(this.currentPageIndex+1);}},
@@ -82,8 +87,11 @@ var FormWizard = new Class({
 		this.setOptions(options);
 		this.options.firstPage = Math.max(this.options.firstPage-1,0) ; 	
 		this.currentPageIndex = this.options.firstPage; 
-	
+  	
 		form.addClass(this.options.formClass);
+		form.addClass(this.options.currentPageClassPrefix + "-" + this.currentPageIndex);
+    form.addClass(this.options.currentPageClassPrefix + '-first');
+
 		form.getElements("." + this.options.pageClass).each(
 		function(item) {
 			var page = {domElement: item};
@@ -91,13 +99,15 @@ var FormWizard = new Class({
 			page.onExitPage =  pageFlow[item.id]?$pick(pageFlow[item.id].onExit, $lambda(true)): $lambda(true);
 			this.pages.push(page);
 		},this);
+		
+		this.lastPageIndex = this.pages.length-1;
 
-		for (var i=1, limit=this.pages.length;i<limit;i++) {
+		for (var i=1, limit=this.lastPageIndex;i<=limit;i++) {
 			this.pages[i].domElement.setStyle('display','none');
 		}
 		
 		if (this.options.enterLastPage !== null) {
-			this.pages[this.pages.length-1]['onEnterPage'] = this.options.enterLastPage;
+			this.pages[this.lastPageIndex]['onEnterPage'] = this.options.enterLastPage;
 		}
 
 		if (this.options.createControlArea) {
@@ -126,19 +136,42 @@ var FormWizard = new Class({
 	}, // eo initialize
 	changePage: function (targetPageIndex) {
 		if (this.pages[targetPageIndex]) {
-			if (this.pages[this.currentPageIndex].onExitPage()){
-				if (this.pages[targetPageIndex].onEnterPage()) {
+			if (this.pages[this.currentPageIndex].onExitPage(targetPageIndex, this.currentPageIndex)){
+				if (this.pages[targetPageIndex].onEnterPage(targetPageIndex, this.currentPageIndex)) {
 					this.pages[this.currentPageIndex].domElement.setStyle("display","none");
 					this.pages[targetPageIndex].domElement.setStyle("display","");
+          this.changeCurrentPageClass(targetPageIndex, this.currentPageIndex);
 					this.currentPageIndex = targetPageIndex;
+
 				}
 			}
 		}
 		return false; // stop the event propagation
 	},
+	changeCurrentPageClass: function(newPageIndex, currentPageIndex) {
+	  var currentPageClass = this.options.currentPageClassPrefix;
+	  if (currentPageIndex == newPageIndex) return;
+ 		if (this.pages[newPageIndex]) {
+      this.domElement.set("class", 
+			  this.domElement.get("class").replace(
+			    currentPageClass + "-" + currentPageIndex, 
+			    currentPageClass + "-" + newPageIndex
+			  )
+			);
+			if (currentPageIndex == this.lastPageIndex
+			    || newPageIndex == this.lastPageIndex ) {
+		    this.domElement.toggleClass(currentPageClass + '-last');
+		  }
+    	if (currentPageIndex == this.options.firstPage
+    	    || newPageIndex == this.options.firstPage) {
+		    this.domElement.toggleClass(currentPageClass + '-first');
+		  }
+	  }
+	},
 	resetForm: function () {
 		this.domElement.reset();
 		this.pages[this.currentPageIndex].domElement.setStyle("display","none");
+    this.changeCurrentPageClass(this.options.firstPage, this.currentPageIndex);
 		this.currentPageIndex = this.options.firstPage;
 		this.pages[this.currentPageIndex].domElement.setStyle("display","");
 		return false; // stop the event propagation
