@@ -42,11 +42,11 @@ The various available options are:
  - *showControlCaptions* (default: true) if false omits (even if specified) the captioni (*title*) of the control buttons.
  - *wizardControls* (default ["reset", "backward", "forward"]) is an array listing the desired buttons (to be created or already in place), 
    the order matters if createControlArea is *true*. Recognized buttons are reset, backward, forward and submit, use should be clear
- - *controls* is an object containing configuration directives. It is aimed to configure the aspect of the various wizard buttons. It has 
-   four properties: submit, forward, backward and reset. 
  - *currentPageClassPrefix* is the prefix to be used for marking the wizard container with a class describing the page displayed in order 
    to give a css hook to fulfill dedicated (presentation?) tasks when the wizard flow reach specific pages. An example can be hide and
    display the control buttons with css rules.
+ - *controls* is an object containing configuration directives. It is aimed to configure the aspect of the various wizard buttons. It has 
+   four properties: submit, forward, backward and reset. 
 
 	The properties share a common structure: it comprehends a *title* (used if the plugin have to create the button) and *hook* a class
 	used by the plugin to find the different buttons and attach to them the correct behaviour. Defaults are listed in the code below:
