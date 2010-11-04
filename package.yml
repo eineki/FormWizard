@@ -2,6 +2,6 @@ name: FormWizard
 author: eineki
 category: Forms
 tags: [form, webui, wizard]
-docs: http://liberosoftware.net/FormWizard/doc.html
-demo: http://liberosoftware.net/FormWizard/Examples/index.html
+#docs: http://liberosoftware.net/FormWizard/doc.html
+#demo: http://liberosoftware.net/FormWizard/Examples/
 current: 0.3
