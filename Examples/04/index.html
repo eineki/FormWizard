@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Form Wizard (Mootools plugin) example</title>
+  <script type="text/javascript" src="../lib/mootools-1.2.4-core-nc.js"></script>
+  <script type="text/javascript" src="../lib/mootools-1.2.4.2-more.js"></script>
+  <script type="text/javascript" src="../../Source/FormWizard.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../assets/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../assets/main.css"/>
+  <link rel="stylesheet" type="text/css" href="wizard-alternate.css"/>
+  <script type="text/javascript">
+     window.addEvent('domready',function() { 
+       $('trigger').addEvent('click', function() { 
+         new FormWizard('contactForm', {"createControlArea": true, showControlCaptions: false}, 
+           { "summaryPage": { 
+               "onEnter": function(){
+                 $('confirmEmail').innerHTML = $('emailField').value; 
+                 $('confirmMsg').innerHTML = $('areamsg').value;
+                 return true; 
+               }},
+             "contactData": { 
+               "onExit": function(){
+		 var result = true;
+		 if ($('veganUser').checked) result = 2;
+		 if ($('emailField').value) return result;
+                 alert("The email field is mandatory! Fill it to proceed");
+                 return false;
+               }},
+             "messagePage": {
+               "onExit":  function(target, current){ 
+                 var test = $('areamsg').value;
+		 if (target < current) {
+                   // we ar going back a step => don't have to check exit rules
+                   // just test if we have to skip the meat addicted page
+		   return $('veganUser').checked?0:true;
+                 }
+                 if (test && test != "Leave your message here...") return true;
+                 alert("Please, leave a message before you move onward.");
+                 return false;
+               }}
+           }
+         );
+       });
+       $('areamsg').addEvent('focus',function(){this.value="";});
+     });
+  </script>
+</head>
+<body>
+  <div id="wrapper" class="clearfix">
+  <div id="left-bar">
+  <h2 class="title">Examples</h2>
+  <ul id="examples">
+    <li class="btn-menu"><a class="rounded-box" href="../index.html">Gallery</a></li>
+    <li style="clear: left;"><a class="rounded-box" href="../01/index.html">01</a></li>
+    <li><a class="rounded-box" href="../02/index.html">02</a></li>
+    <li><a class="rounded-box" href="../03/index.html">03</a></li>
+    <li><a class="rounded-box current" href="#">04</a></li>
+    <li><a class="rounded-box" href="../05/index.html">05</a></li>
+    <!--li><a class="rounded-box" href="../06/index.html">06</a></li>
+    <li><a class="rounded-box" href="../07/index.html">07</a></li>
+    <li><a class="rounded-box" href="../08/index.html">08</a></li-->
+  </ul>
+
+</div>
+
+<div id="content">
+<h2 class="title">FormWizard: CSS skin.</h2>
+<p> Let's take the previous example. With minimal changes to the javascript code and html structure 
+    we will try to give him a new look.</p>
+<p> We will wipe out the control area at the bottom and skin the buttons in order to mold them into
+    the wizard frame.</p>
+
+<h2 class="title">The code</h2>
+<p>This time we will use quite the same code of the <a href="../03/index.html">previous example</a>. Even the  
+   html structure is the same. We will change just the css and set the property <em>showControlCaptions</em>
+   to <span class="syntax-reserved-word">false</span> to hide the uhm... caption of the controls.</p>
+<p class="ref-code"><span class="syntax-reserved-word">new</span> FormWizard(<span class="syntax-string">'contactForm'</span>, 
+           {<span class="syntax-string">"createControlArea"</span>: <span class="syntax-reserved-word">true</span>,
+            <span class="syntax-string">"showControlCaptions"</span>: <span class="syntax-reserved-word">false</true>
+           }, 
+           { ... });
+</p>
+
+<p> Press this button to see it at work: <input class="utility" type="button" id="trigger" value="Apply FormWizard"/></p>
+<p> You should also feel free to peruse the <a href="wizard-alternate.css">css used to style the wizard</a>.
+</p>
+<h2 class="title">The Form</h2>
+<form id="contactForm" action="#">
+<fieldset class="wizard-page" id="contactData">
+<legend><span>Contact Data</span></legend>
+<p>Insert your email and let me send you a ton of spam. You can 
+change idea later in the submission process. Sure, I swear.</p>
+<p class="centered-container"><input type="text" name="email" id="emailField"/></p>
+<p class="centered-container"><label for="veganUser">I'm vegan</label><input type="checkbox" name="veganUser" id="veganUser"/></p>
+</fieldset>
+<fieldset class="wizard-page" id="unimportantOne">
+<legend><span>Beware - Hic sunt leones</span></legend>
+<p>Maybe in this page there is something annoying to people not used to think to an animal being as a
+   source of food or fabric, and we don't want to harm them.</p>
+</fieldset>
+<fieldset class="wizard-page" id="messagePage">
+<legend><span>Time to input a complicate message</span></legend>
+<p>Insert your message below</p>
+<p class="centered-container">
+  <textarea id="areamsg" name="message" cols="50" rows="7">Leave your message here...</textarea>
+</p>
+</fieldset>
+<fieldset class="wizard-page" id="summaryPage">
+<legend><span>Summary</span></legend>
+<p>Your mail is <span id="confirmEmail"></span> and the message you filed is
+<blockquote id="confirmMsg"></blockquote> </p>
+<p>You can go back and change the previously 
+inputed datas or press the submit button to send your data to the nearest
+black hole.</p>
+<p>Obviously, the widget contained in the several pages of the wizard
+can be scripted as usual as you will see to the <a href="example4.html">forth example</a></p>
+<p class="centered-container"><input type="submit"/> </p>
+</fieldset>
+</form>
+
+</div>
+</div>
+</body>
+</html>

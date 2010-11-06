@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Form Wizard (Mootools plugin) example</title>
+  <script type="text/javascript" src="../lib/mootools-1.2.4-core-nc.js"></script>
+  <script type="text/javascript" src="../lib/mootools-1.2.4.2-more.js"></script>
+  <script type="text/javascript" src="../../Source/FormWizard.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../assets/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../assets/main.css"/>
+  <link rel="stylesheet" type="text/css" href="wizard.css"/>
+  <script type="text/javascript">
+     window.addEvent('domready',function() { 
+       $('trigger').addEvent('click', function() { 
+         new FormWizard('contactForm', {"createControlArea": true}, 
+           { "summaryPage": { 
+               "onEnter": function(){
+                 $('confirmEmail').innerHTML = $('emailField').value; 
+                 $('confirmMsg').innerHTML = $('areamsg').value;
+                 return true; 
+               }},
+             "contactData": { 
+               "onExit": function(){
+                 if ($('emailField').value) return true;
+                 alert("The email field is mandatory! Fill it to proceed");
+                 return false;
+               }},
+             "messagePage": {
+               "onExit":  function(){ 
+                 var test = $('areamsg').value;
+                 if (test && test != "Leave your message here...") return true;
+                 alert("Please, leave a message before you leave this page.");
+                 return false;
+               }}
+           }
+         );
+       });
+       $('areamsg').addEvent('focus',function(){this.value="";});
+     });
+  </script>
+</head>
+<body>
+  <div id="wrapper" class="clearfix">
+  <div id="left-bar">
+  <h2 class="title">Examples</h2>
+  <ul id="examples">
+    <li class="btn-menu"><a class="rounded-box" href="../index.html">Gallery</a></li>
+    <li style="clear:left"><a class="rounded-box" href="../01/index.html">01</a></li>
+    <li><a class="rounded-box current" href="#">02</a></li>
+    <li><a class="rounded-box" href="../03/index.html">03</a></li>
+    <li><a class="rounded-box" href="../04/index.html">04</a></li>
+    <li><a class="rounded-box" href="../05/index.html">05</a></li>
+    <!--li><a class="rounded-box" href="../06/index.html">06</a></li>
+    <li><a class="rounded-box" href="../07/index.html">07</a></li>
+    <li><a class="rounded-box" href="../08/index.html">08</a></li-->
+  </ul>
+
+</div>
+
+<div id="content">
+<h2 class="title">FormWizard: Add some scripting.</h2>
+<p> You can modify the FormWizard behaviour to a certain extent using its options, but a key feature is
+    the ability to script the page flips.</p>
+<p> You can leverage on this feature to provide inline validation or a flexible workflow, or just spice up
+    the wizard presentation. I will explain a very basic approach to this scripting delaying a thoroguh approach
+    in a yet to come example.</p>
+<h3 class="title">FormWizard flow: How it works?</h3>
+<p> When the user clicks to move on the next or previous page some <em>events</em> are fired: </p>
+<p>First of all, if an onExit event it is registered with the current page,
+   the function registered with the event is evaluated. If it return a false
+   value then the flip stops and the page is not switched. </p>
+<p>Depending on the <b>non false value</b> returned by the function evaluated
+   in the first step, FormWizard prepare itself to show a new page. 
+   We can enter the new page (and leave the previous one) only if the onEnter function attached to 
+   the target page,if there is one, evaluates to true</p>
+<p>In short, the pageflip happens only if both the function return a true value. It is on behalf of
+   the function that negate the flip to show a notification to the user.</p>
+<p>in this example we get lazy and let the plugin to inject the control area by itself with the 
+   <em>createControlArea</em> directive in the second parameter.
+</p>
+<h2 class="title">The code</h2>
+<p>The FormWizard constructor has three parameters. We will use the first and the third ones:</p>
+<p class="ref-code"><span class="syntax-reserved-word">new</span> FormWizard(<span class="syntax-string">'contactForm'</span>, 
+           {<span class="syntax-string">"createControlArea"</span>: <span class="syntax-reserved-word">true</span>}, 
+           { <span class="syntax-string">"summaryPage"</span>: { 
+               <span class="syntax-string">"onEnter"</span>: <span class="syntax-reserved-word">function</span>(){
+                 $(<span class="syntax-string">'confirmEmail'</span>).innerHTML = $(<span class="syntax-string">'emailField'</span>).value; 
+                 $(<span class="syntax-string">'confirmMsg'</span>).innerHTML = $(<span class="syntax-string">'areamsg'</span>).value;
+                 <span class="syntax-reserved-word">return true</span>; 
+               }},
+             <span class="syntax-string">"contactData"</span>: { 
+               <span class="syntax-string">"onExit"</span>: <span class="syntax-reserved-word">function</span>(){
+                 <span class="syntax-reserved-word">if</span> ($(<span class="syntax-string">'emailField'</span>).value) <span class="syntax-reserved-word">return true</span>;
+                 <span class="syntax-reserved-word">alert</span>(<span class="syntax-string">"The email field is mandatory! Fill it to proceed"</span>);
+                 <span class="syntax-reserved-word">return false</span>;
+               }},
+             <span class="syntax-string">"messagePage"</span>: {
+               <span class="syntax-string">"onExit"</span>:  <span class="syntax-reserved-word">function</span>(){ 
+                 <span class="syntax-reserved-word">var</span> test = $(<span class="syntax-string">'areamsg'</span>).value;
+                 <span class="syntax-reserved-word">if</span> (test && test != <span class="syntax-string">"Leave your message here..."</span>) <span class="syntax-reserved-word">return true</span>;
+                 <span class="syntax-reserved-word">alert</span>(<span class="syntax-string">"Please, leave a message before you leave this page."</span>);
+                 <span class="syntax-reserved-word">return false</span>;
+               }}
+           }
+         );
+       }); 
+</p>
+<p>In the form there are fieldsets with id <em>contactData</em>, <em>messagePage</em> and <em>summaryPage</em>.
+   The respective functions will be called when leaving the fieldsets <em>contactData</em>, <em>messagePage</em>
+   and just before entering the last fieldset (<em>summaryPage</em>) 
+<p> Press this button to see it at work: <input class="utility" type="button" id="trigger" value="Apply FormWizard"/></p>
+<p> You should also feel free to peruse the <a href="wizard.css">css used to style the wizard</a>.
+</p>
+<h2 class="title">The Form</h2>
+<form id="contactForm" action="#">
+<fieldset class="wizard-page" id="contactData">
+<legend><span>Contact Data</span></legend>
+<p>Insert your email and let me send you a ton of spam. You can 
+change idea later in the submission process. Sure, I swear.</p>
+<p class="centered-container"><input type="text" name="email" id="emailField"/></p>
+</fieldset>
+<fieldset class="wizard-page" id="unimportantOne"><legend><span>Interleave</span></legend><p>This is an fieldset used to demonstrate that not all the fieldset have to
+  be mentioned in the flow</p>
+</fieldset>
+<fieldset class="wizard-page" id="messagePage">
+<legend><span>Time to input a complicate message</span></legend>
+<p>Insert your message below</p>
+<p class="centered-container">
+  <textarea id="areamsg" name="message" cols="50" rows="7">Leave your message here...</textarea>
+</p>
+</fieldset>
+<fieldset class="wizard-page" id="summaryPage">
+<legend><span>Summary</span></legend>
+<p>Your mail is <span id="confirmEmail"></span> and the message you filed is
+<blockquote id="confirmMsg"></blockquote> </p>
+<p>You can go back and change the previously 
+inputed datas or press the submit button to send your data to the nearest
+black hole.</p>
+<p>Obviously, the widget contained in the several pages of the wizard
+can be scripted as usual as you will see to the <a href="example4.html">forth example</a></p>
+<p class="centered-container"><input type="submit"/> </p>
+</fieldset>
+</form>
+
+</div>
+</div>
+</body>
+</html>

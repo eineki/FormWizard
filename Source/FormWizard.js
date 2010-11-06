@@ -12,7 +12,7 @@ requires:
 
 provides: [FormWizard]
 
-DEMO: http://www.liberosoftware.net/FormWizard/demo
+DEMO: http://www.liberosoftware.net/FormWizard/Examples/
 
 ...
 */

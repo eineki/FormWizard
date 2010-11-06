@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Form Wizard (Mootools plugin) example</title>
+  <script type="text/javascript" src="../lib/mootools-1.2.4-core-nc.js"></script>
+  <script type="text/javascript" src="../lib/mootools-1.2.4.2-more.js"></script>
+  <script type="text/javascript" src="../../Source/FormWizard.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../assets/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="../assets/main.css"/>
+  <link rel="stylesheet" type="text/css" href="wizard.css"/>
+  <script type="text/javascript">
+    window.addEvent('domready',function(){ $('trigger').addEvent('click',
+                               function() { new FormWizard('contactForm'); })});
+  </script>
+</head>
+<body>
+  <div id="wrapper" class="clearfix">
+  <div id="left-bar">
+  <h2 class="title">Examples</h2>
+  <ul id="examples">
+    <li class="btn-menu"><a class="rounded-box" href="../index.html">Gallery</a></li>
+    <li style="clear: left;"><a class="rounded-box current" href="#">01</a></li>
+    <li><a class="rounded-box" href="../02/index.html">02</a></li>
+    <li><a class="rounded-box" href="../03/index.html">03</a></li>
+    <li><a class="rounded-box" href="../04/index.html">04</a></li>
+    <li><a class="rounded-box" href="../05/index.html">05</a></li>
+    <!--li><a class="rounded-box" href="../06/index.html">06</a></li>
+    <li><a class="rounded-box" href="../07/index.html">07</a></li>
+    <li><a class="rounded-box" href="../08/index.html">08</a></li-->
+  </ul>
+
+</div>
+
+<div id="content">
+<h2 class="title">FormWizard: Simplest usage.</h2>
+<p> In this example we just provide a form and apply FormWizard to it.</p>
+<p> No special options are provided to the constructor, just the id of the form we want to convert.</p>
+
+<h2 class="title">The code</h2>
+<p>The code is very simple:</p>
+<p class="ref-code"><span class="reserved-word">new</span> FormWizard('contactForm'); 
+</p>
+<p> Press this button to see it at work: <input class="utility" type="button" id="trigger" value="Apply FormWizard"/></p>
+<p> You should also feel free to peruse the <a href="wizard.css">css used to style the wizard</a>.
+</p>
+<h2 class="title">The Form</h2>
+<form id="contactForm" action="#">
+<h1 class="unwizarded-only">Title of the static Form</h1>
+<fieldset class="wizard-page"><legend><span>The very first page</span></legend>
+<p>Insert your email and let me send you a ton of spam. You can 
+change idea later in the submission process.</p>
+<p>Trust me, I swear.	</p>
+<p> The email address goes here -&gt; <input type="text" name="email"/></p>
+</fieldset>
+<fieldset class="wizard-page">
+<legend><span>Free Message</span></legend>
+<p>Insert your message below</p>
+<p class="centered-container"><textarea id="areamsg" name="message" cols="50" rows="7">Messaggio</textarea></p>
+</fieldset>
+<fieldset class="wizard-page">
+<legend><span>Summary</span></legend>
+<p>If we had used the pageFlow control we could have a summary of the data we get.</p>
+<p>Let me show you <a href="../02/index.html">another example</a> adding 
+a script to fill this page with the data from the previous ones.</p>
+<p>Oh, if I was in your shoes, I won't push the submit button below. It sends all your data 
+to nowere, as far as I know.</p>
+<p class="centered-container"> <input type="submit"/> </p>
+</fieldset>
+<div class="wizard-control-area">
+	<button class="wizard-control-reset wizard-button">Reset</button>
+	<button class="wizard-control-backward wizard-button">Previous</button>
+	<button class="wizard-control-forward wizard-button">Next</button>
+</div>
+</form>
+</div>
+</div>
+</body>
+</html>

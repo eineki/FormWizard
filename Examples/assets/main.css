@@ -1,0 +1,374 @@
+  /* 
+ * Background #c0c0c0
+ * Inset Background #d0d0d0
+ * Dark inset #a0a0a0
+ 
+ */
+
+html {
+  font-size: 12px;
+}
+
+body {
+  background-color: #c0c0c0;
+}
+
+.rounded-box {
+/* background: url(../images/background_dark.jpg); */
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;	
+}
+
+div#wrapper{
+	width: 960px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+a:active{
+	position: relative;
+	top: 1px;
+}
+
+/* left-bar */
+
+div#left-bar{
+	float: left;
+	width: 200px;
+/*	position:fixed; */
+}
+
+h1#logo a {
+	background: url(images/logo.jpg) no-repeat;
+	display:block;
+	width: 225px;
+	height: 80px;
+	text-indent: -9999px;
+	margin: 50px 0 0 0;
+}
+
+/* navigation */
+ul#menu{
+  margin: 38px 0 0 80px;	
+}
+
+ul {
+  clear: both;
+}
+
+ul#refPage {
+  float: left;
+  margin: 0;
+  padding-left:0;
+}
+
+ul#examples {
+  margin: 38px 0 0 7px;	
+}
+
+ul#versions li,
+ul#refPage li,
+ul#examples li,
+ul#menu li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul#examples li a,
+ul#versions li a,
+ul#menu li a{
+  display: block;
+  width: 134px;
+  height: 35px;
+/*  font-size: smaller; */
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  border-width: 1px;
+  border-color: #dadade;
+  border-style: solid;
+  background: #dadade;
+  margin: 0 0 20px 0;
+  line-height: 35px;
+}
+
+ul#examples li.btn-menu a {
+  width: 160px;
+  font-weigth: bold;
+}
+
+ul#versions li a,
+ul#examples li a {
+  width: 35px;
+  font-weigth: bold;
+}
+
+ul#versions li a.current,
+ul#examples li a.current {
+  background: #777; 
+  color: #ddd;
+}
+
+ul#versions li,
+ul#examples li {
+ height: 47px;
+ width:42px;
+ float:left;
+}
+
+ul#examples li.btn-reference a,
+ul#menu li.btn-reference a {
+  background: #dededa;
+}
+
+ul#examples li a:hover,	
+ul#menu li a:hover {
+  background: #eaeaee;
+  margin-left: 0.5em;
+  text-decoration: none;
+}
+
+ul#examples li a:hover {
+margin-left: 2px;
+margin-top: 2px;
+
+}
+
+ul#versions li a.current:hover,
+ul#examples li a.current:hover {
+  background: #666;
+  margin: 0;
+  text-decoration: none;
+}
+
+
+/* main content */
+
+div#content{
+	float: right;
+	width: 630px;
+}
+
+.sfhidden{
+	display: none;
+}
+
+a:hover{
+	text-decoration: underline;	
+}
+
+p,
+cite#more-work,
+h3,
+div.work-link-container,
+div.contact-row, 
+cite#freelance-work,
+div#page-not-found a,
+ .message-succes{
+	text-shadow: 1px 1px 1px rgba(255,255,255,.60);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Museo-bold";
+	color: #7e7e7e;
+	text-shadow: 1px 1px 1px rgba(255,255,255,.7);
+	margin: 0 0 20px 0;
+}
+
+h2{
+	font-size: 1.6em;
+}
+
+h3{
+	font-size: 1.25em;
+}
+
+
+
+div.work-information{
+	font-size: 0.93em;
+	line-height: 1.5em;
+	text-align:justify;
+}
+
+div.work-information h3{
+	font-size: 1.06em;
+	margin: 0 0 20px 0;
+	font-weight:bold;
+}
+
+div.work-link-container{
+	margin: 20px 0 0 10px;
+	font-size: 0.93em;
+}
+
+@font-face{
+	font-family: "Museo-light";
+	src: url("fonts/Museo300-Regular.otf") format("opentype");
+}
+
+@font-face{
+	font-family: "Museo-semibold";
+	src: url("fonts/Museo500-Regular.otf") format("opentype");
+}
+
+@font-face{
+	font-family: "Museo-bold";
+	src: url("fonts/Museo700-Regular.otf") format("opentype");
+}
+
+.note {
+  font-style: italic;
+  font-size: 90%;
+}
+
+span.signature {
+  display: block;
+  text-align: right;
+  clear: left;
+  font-weight: bold;
+}
+
+.title {
+  margin-top: 1.5em;
+}
+
+/* ie.css */
+/* self clearing floats */
+
+* html .clearfix { 	
+	height: 1%;
+	}
+*:first-child+html .clearfix { 
+	min-height: 1px;
+	}
+	
+/* reset button padding */
+button{
+	width: 1;
+	overflow: visible;
+}
+
+.femail{
+	display:none;
+}
+
+.wcard {
+  line-height: 175%;
+  text-align: right;
+  width: 400px;
+  heigth: 250px;
+  border-top: 10px solid silver;
+/*  font-size: smaller; */
+  margin-top:  20%;
+  padding-right: 1em;
+}
+
+
+
+p {
+ margin-bottom: 1.5em;
+ line-height: 1.5em;
+}
+
+p.code {
+  font-family: monospace;
+  white-space: pre;
+  margin-left: 2em;
+  text-shadow: none;
+}
+
+
+.syntax-reserved-word {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.syntax-string {
+  color: #7860bf;
+}
+
+.syntax-comment {
+  color: #b3b3b3;
+	font-size: 90%;
+  font-style: italic; 
+}
+
+.syntax-json-identifier {
+  font-weight: bold;
+  color: #7860bf;
+}
+
+input.utility {
+  font-family: monospace;
+  margin: 1em 0 1em 3em;
+}
+
+/* reference */
+p.ref-code {
+  background-color: #e3e3e3;
+  padding: 1em 1em 1em 2em;
+  border:1px solid #A0A0A0;
+  white-space: pre;
+  font-family: monospace;	
+}
+
+dl {
+position: relative;
+}
+
+dt {
+  float:left;
+  clear:left;
+  font-style:italic;
+  width: 4em;
+  margin-bottom:0.3em;
+}
+
+dd {
+  float:left;
+  width: 45em;
+}
+
+dd.last {
+ /* position: static; */
+}
+
+ul#refPage li {
+  float:left;
+  width: 100%;
+}
+
+ul#refPage li h1,
+ul#refPage li h2,
+ul#refPage li h3,
+ul#refPage li h4 {
+  margin: 20px 0 15px 0;
+  color: #222;
+  clear: both;
+}
+
+.ref-params {
+font-style: italic;
+}
+
+.ref-type {
+  font-weight: bold;
+  color: red;
+}
+
+ul#options {
+  margin: 0;
+  padding-left: 0;
+}
+
+ul#options li {
+  margin: 0 0 0.5em 0;
+}
+
+ul#versions {
+  float:left;
+  width: 100%;
+}

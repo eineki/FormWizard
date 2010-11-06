@@ -1,0 +1,88 @@
+body{
+  padding: 1em;
+}
+/* Styling of the form before 
+   the FormWizard Transformation */
+
+form {
+  width: auto;
+  background: #fff;
+  padding: 10px;
+  border-top: 2px solid #717171;
+}
+
+.wizard-control-area {
+/* the wizard-control-area shouldn't be 
+   in the page before the FormWizard Invocation
+   (IN THIS EXAMPLE). Let's hide it if it is not
+   there */
+  display: none;
+}
+
+fieldset p {
+  margin-top: 2em;
+}
+
+fieldset {
+  vertical-align: middle;
+  border: 1px solid #e3e3e3;
+  margin: 5px 40px;
+  position: relative;
+  background: #fff;
+  padding: 1.5em 0.5em 1em 1em;
+} 
+  
+fieldset legend span {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  font-weight: bold;
+  font-variant: capitalize;
+  font-style: italic;
+  font-size: larger;
+} 
+
+.centered-container {
+  width: 100%;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#confirmEmail {
+  font-weight: bolder;
+}
+
+/* Styles applied to the form after 
+   the FormWizard transformation */
+
+form.wizard {
+  border: 10px solid black;
+  padding: 0;
+  width: auto;
+  width: 600px;
+  height: 320px;
+  position: relative;
+}
+
+form.wizard .unwizarded-only {
+  display: none;
+}
+
+.wizard-control-area, 
+.wizard #controlArea {
+  position:absolute;
+  bottom:0;
+  background-color: #d9d9d9;
+  border: 0;
+  border-top: 1px solid #b8b8b8;
+  margin:0;
+  width: 100%;
+  padding: 0.5em 0;
+  text-align: center;
+  display: block;
+}
+
+.wizard fieldset {
+  border: 0;
+}
