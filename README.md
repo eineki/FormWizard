@@ -99,7 +99,7 @@ RELEASE NOTE
       configurable.
     - added a new example.
     - The onEnterPage and onExitPage now can have two parameters, the page to show and the page actually displayed.
-  + 2010-11-02 Formwizard 0.3
+ + 2010-11-02 Formwizard 0.3
     - Last version for mootools 1.2.xx
     - The page swap is into a new funcion (named swap) ready to be refactored it you want fancier page swap
     - Revamped the examples' gallery
