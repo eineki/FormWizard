@@ -86,6 +86,7 @@ var FormWizard = new Class({
 		this.domElement = form;
 
 		this.setOptions(options);
+		if (form.hasClass(this.options.formClass)) throw(new WizardException("Wizard container already primed"));
 		this.options.firstPage = Math.max(this.options.firstPage-1,0) ; 	
 		this.currentPageIndex = this.options.firstPage; 
   	
