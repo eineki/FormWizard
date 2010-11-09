@@ -71,7 +71,7 @@ var FormWizard = new Class({
 	"currentPageIndex": 0, // The page being show
 	"lastPageIndex": 0,
 	"controls": {
-		"submit":  {"action": $empty },
+		"submit":  {"action": function(){} },
 		"forward": {"action": function(){ return this.changePage(this.currentPageIndex+1);}},
 		"backward":{"action": function(){return this.changePage(this.currentPageIndex-1);}},
 		"reset":   {"action": function() { return this.resetForm();}}
@@ -97,8 +97,8 @@ var FormWizard = new Class({
 		form.getElements("." + this.options.pageClass).each(
 		function(item) {
 			var page = {domElement: item};
-			page.onEnterPage = pageFlow[item.id]?$pick(pageFlow[item.id].onEnter, $lambda(true)):$lambda(true);
-			page.onExitPage =  pageFlow[item.id]?$pick(pageFlow[item.id].onExit, $lambda(true)): $lambda(true);
+			page.onEnterPage = pageFlow[item.id]?$pick(pageFlow[item.id].onEnter, Function.from(true)):Function.from(true);
+			page.onExitPage =  pageFlow[item.id]?$pick(pageFlow[item.id].onExit, Function.from(true)): Function.from(true);
 			this.pages.push(page);
 		},this);
 		
