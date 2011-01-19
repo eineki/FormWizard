@@ -7,8 +7,8 @@ license: MIT-style
 authors: [Eineki]
 
 requires:
-- more/1.2.4: Lang
-- core/1.2.4: '*'
+- more/1.3.1: Lang
+- core/1.3: '*'
 
 provides: [FormWizard]
 
@@ -93,21 +93,24 @@ var FormWizard = new Class({
 		form.addClass(this.options.formClass);
 		form.addClass(this.options.currentPageClassPrefix + "-" + this.currentPageIndex);
     		form.addClass(this.options.currentPageClassPrefix + "-first");
-
-		form.getElements("." + this.options.pageClass).each(
+		
+		var collection = form.getChildren("."+this.options.pageClass);
+		collection.setStyle("display", "none");
+		
+		collection.each(
 		function(item) {
 			var page = {domElement: item};
-			page.onEnterPage = pageFlow[item.id]?$pick(pageFlow[item.id].onEnter, Function.from(true)):Function.from(true);
-			page.onExitPage =  pageFlow[item.id]?$pick(pageFlow[item.id].onExit, Function.from(true)): Function.from(true);
+//			page.onEnterPage = pageFlow[item.id]?$pick(pageFlow[item.id].onEnter, Function.from(true)):Function.from(true);
+//			page.onExitPage =  pageFlow[item.id]?$pick(pageFlow[item.id].onExit, Function.from(true)): Function.from(true);
+			page.onEnterPage = pageFlow[item.id]?[pageFlow[item.id].onEnter, Function.from(true)].pick():Function.from(true);
+			page.onExitPage =  pageFlow[item.id]?[pageFlow[item.id].onExit, Function.from(true)].pick(): Function.from(true);
 			this.pages.push(page);
 		},this);
 		
 		this.lastPageIndex = this.pages.length-1;
 
-		for (var i=1, limit=this.lastPageIndex;i<=limit;i++) {
-			this.pages[i].domElement.setStyle("display","none");
-		}
-		
+		collection[this.options.firstPage].setStyle("display","");
+
 		if (this.options.enterLastPage !== null) {
 			this.pages[this.lastPageIndex]["onEnterPage"] = this.options.enterLastPage;
 		}
@@ -117,7 +120,7 @@ var FormWizard = new Class({
 			for (i=0, limit=this.options.wizardControls.length; i< limit; i++) {
 				button = this.options.controls[this.options.wizardControls[i]];
 				(new Element("button",{"html": this.options.showControlCaptions?button.title:"",
-					                   "class":[button.hook,$pick(button.buttonClass, this.options.defaultButtonClass)].join(" "),
+					                   "class":[button.hook,[button.buttonClass, this.options.defaultButtonClass].pick()].join(" "),
 							   "events": {"click": this.controls[this.options.wizardControls[i]].action.bind(this)}
 									  }
 							)).inject(controlArea);
