@@ -104,6 +104,8 @@ RELEASE NOTE
     - The page swap is into a new funcion (named swap) ready to be refactored it you want fancier page swap
     - Revamped the examples' gallery
     - setup a support site at http://liberosoftware.net/FormWizard
+ + 2011-01-19 Formwizard 0.4
+    - Mootools 1.3 enabled version
 Contribution
 ------------
 

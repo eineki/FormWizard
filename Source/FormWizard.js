@@ -41,7 +41,7 @@ function WizardException(message){
 
 var FormWizard = new Class({
 	"Implements": Options,
-	"version": "0.3",
+	"version": "0.4",
 
 	"options": {
 		"formClass": "wizard",
@@ -78,6 +78,7 @@ var FormWizard = new Class({
 	},
 
 	initialize: function (form, options, pageFlow){
+		if (MooTools.version < "1.3") throw(new WizardException("FormWizard 0.4+ need MooTools 1.3+ to work"));
 		var button, buttonElement;
 		if (!pageFlow)pageFlow={};
 		
