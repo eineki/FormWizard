@@ -64,3 +64,14 @@ fieldset legend span {
 #confirmEmail {
   font-weight: bolder;
 }
+
+
+/* 
+ * workaround for this webkit bug 
+ * https://bugs.webkit.org/show_bug.cgi?id=35981
+ */
+fieldset > p:first-of-type
+{
+-webkit-margin-top-collapse: separate;
+}
+
