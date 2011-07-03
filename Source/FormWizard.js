@@ -84,17 +84,18 @@ var FormWizard = new Class({
 		form = document.id(form);
 		if (!form) throw(new WizardException("Wizard container not found"));
 		this.domElement = form;
-
+ 	
 		this.setOptions(options);
 		this.options.firstPage = Math.max(this.options.firstPage-1,0) ; 	
 		this.currentPageIndex = this.options.firstPage; 
-  	
+ 
 		form.addClass(this.options.formClass);
 		form.addClass(this.options.currentPageClassPrefix + "-" + this.currentPageIndex);
     		form.addClass(this.options.currentPageClassPrefix + "-first");
-
+ 
 		form.getElements("." + this.options.pageClass).each(
-		function(item) {
+		function(item,index) {
+                        item.setStyle("display", index==this.currentPageIndex?"":"none");
 			var page = {domElement: item};
 			page.onEnterPage = pageFlow[item.id]?$pick(pageFlow[item.id].onEnter, $lambda(true)):$lambda(true);
 			page.onExitPage =  pageFlow[item.id]?$pick(pageFlow[item.id].onExit, $lambda(true)): $lambda(true);
@@ -103,10 +104,6 @@ var FormWizard = new Class({
 		
 		this.lastPageIndex = this.pages.length-1;
 
-		for (var i=1, limit=this.lastPageIndex;i<=limit;i++) {
-			this.pages[i].domElement.setStyle("display","none");
-		}
-		
 		if (this.options.enterLastPage !== null) {
 			this.pages[this.lastPageIndex]["onEnterPage"] = this.options.enterLastPage;
 		}
